@@ -213,3 +213,42 @@ body {
   .spine { width: 40px; }
   .spine-title { font-size: .85rem; }
 }
+
+/* ---------- редактор ---------- */
+.editor-bar { display: flex; gap: 22px; justify-content: center; margin-bottom: 24px; font-size: .95rem; }
+.editor-bar a { color: var(--brown-600); text-decoration: none; letter-spacing: .06em; text-transform: uppercase; padding-bottom: 3px; }
+.editor-bar a.on { color: var(--accent); border-bottom: 2px solid var(--accent); }
+.editor-card { background: var(--paper-edge); border: 1px solid var(--rule); padding: 26px 28px; }
+.editor-card .page-title { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; color: var(--brown-900); font-size: 1.8rem; margin: 0 0 8px; text-align: center; }
+.editor-card label { display: grid; gap: 4px; margin-bottom: 14px; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--brown-700); }
+.editor-card input, .editor-card textarea {
+  font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; color: var(--ink);
+  background: var(--paper); border: 1.5px solid var(--brown-600); padding: 8px 10px; width: 100%;
+}
+.editor-card textarea { min-height: 120px; resize: vertical; }
+.editor-card textarea.body { min-height: 50vh; line-height: 1.7; }
+.editor-card .actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.editor-card .section-title { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; font-size: 1.3rem; margin: 26px 0 8px; color: var(--brown-900); }
+.editor-card button, .editor-row button, .chapter-edit button {
+  background: none; border: none; color: var(--accent); font: inherit; cursor: pointer; padding: 4px 6px; text-decoration: underline; text-underline-offset: 3px;
+}
+.editor-card button.primary, .toolbar button.primary, .actions button.primary {
+  text-decoration: none; background: var(--brown-700); color: var(--paper); padding: 8px 16px; letter-spacing: .04em;
+}
+.editor-card button.danger, .editor-row button.danger, .chapter-edit button.danger, .actions button.danger { color: #8b2e1a; }
+.editor-card button:disabled, .chapter-edit button:disabled { opacity: .35; cursor: default; text-decoration: none; }
+.editor-card a, .editor-row a, .chapter-edit a { color: var(--accent); }
+.primary-link { background: var(--brown-700); color: var(--paper) !important; padding: 8px 16px; text-decoration: none !important; }
+.toolbar { display: flex; justify-content: center; margin-bottom: 22px; }
+.editor-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px 4px; border-bottom: 1px dotted var(--rule);
+}
+.editor-row .tools { display: flex; gap: 10px; }
+.editor-row a { color: var(--accent); }
+.chapter-edit { list-style: none; padding: 0; margin: 0; }
+.chapter-edit li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px dotted var(--rule); flex-wrap: wrap; }
+.chapter-edit .tools { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.chapter-edit .tools a { color: var(--accent); font-size: .9rem; padding: 0 6px; }
+.status { font-size: .9rem; color: var(--accent); min-height: 1.2em; margin: 0 0 6px; }
+.hint { font-size: .85rem; color: var(--brown-600); font-style: italic; margin: 0 0 12px; }
