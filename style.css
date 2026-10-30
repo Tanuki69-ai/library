@@ -1,0 +1,215 @@
+:root {
+  --paper: #f1e4c8;
+  --paper-edge: #e2cda4;
+  --ink: #3b2a1a;
+  --brown-900: #2e1c0e;
+  --brown-800: #4a2e17;
+  --brown-700: #6b4324;
+  --brown-600: #8b5a2b;
+  --brown-500: #a0703f;
+  --wood: #5a3a22;
+  --wood-dark: #3d2615;
+  --gold: #c9a24a;
+  --rule: #b89968;
+  --accent: #9a4f2a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background:
+    radial-gradient(ellipse at center, transparent 50%, rgba(46,28,14,.22) 100%),
+    var(--paper);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+.frame {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  text-align: center;
+  border-top: 4px double var(--brown-700);
+  border-bottom: 4px double var(--brown-700);
+  padding: 22px 0 16px;
+  margin-bottom: 36px;
+}
+.crest { color: var(--gold); font-size: 1.6rem; line-height: 1; }
+.masthead h1 {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-weight: 400;
+  font-size: 2.8rem;
+  margin: 6px 0 2px;
+  color: var(--brown-900);
+  letter-spacing: .02em;
+}
+.tagline { font-style: italic; color: var(--brown-600); margin: 0; }
+.topnav { margin-top: 12px; font-size: .95rem; }
+.topnav a { color: var(--accent); text-decoration: none; letter-spacing: .08em; text-transform: uppercase; }
+.topnav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.empty { text-align: center; font-style: italic; color: var(--brown-600); padding: 40px 0; }
+
+/* ---------- shelves ---------- */
+.shelf {
+  position: relative;
+  background: linear-gradient(to bottom, var(--wood), var(--wood-dark));
+  padding: 26px 22px 0;
+  margin-bottom: 36px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.15), 0 6px 0 var(--wood-dark);
+}
+.shelf-label {
+  position: absolute; top: -6px; left: 50%; transform: translate(-50%, -50%);
+  background: var(--paper); border: 1.5px solid var(--brown-700);
+  padding: 0 14px; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--brown-800);
+}
+.spines {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 4px;
+  min-height: 210px;
+  padding-bottom: 0;
+}
+.plank {
+  height: 14px;
+  background: linear-gradient(to bottom, #7a4f2d, #4f321b);
+  margin: 0 -22px;
+  box-shadow: 0 3px 4px rgba(0,0,0,.35);
+}
+
+/* one book spine */
+.spine {
+  --h: 180px;
+  width: 52px; height: var(--h);
+  background: var(--spine, var(--brown-700));
+  color: var(--paper);
+  border: none; padding: 0; cursor: pointer;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 2px 0 0 rgba(255,255,255,.12), inset -2px 0 0 rgba(0,0,0,.25);
+  transition: transform .18s ease;
+}
+.spine:hover, .spine:focus-visible { transform: translateY(-10px); outline: none; }
+.spine::before, .spine::after {
+  content: ""; position: absolute; left: 4px; right: 4px; height: 3px;
+  background: var(--gold); opacity: .85;
+}
+.spine::before { top: 10px; }
+.spine::after { bottom: 10px; }
+.spine-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 1rem;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: calc(var(--h) - 36px);
+  color: var(--gold);
+}
+
+/* ---------- book page ---------- */
+.book-page {
+  background: var(--paper-edge);
+  border: 1px solid var(--rule);
+  box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--rule);
+  padding: 34px 36px 40px;
+  margin-top: 10px;
+  position: relative;
+}
+.bookplate {
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.bookplate h2 {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-weight: 400;
+  font-size: 2.2rem;
+  color: var(--brown-900);
+  margin: 0 0 4px;
+}
+.bookplate .author { font-style: italic; color: var(--brown-600); margin: 0; }
+.bookplate .desc { max-width: 60ch; margin: 10px auto 0; font-size: .95rem; }
+
+.catalog { list-style: none; padding: 0; margin: 0; counter-reset: ch; }
+.catalog li { counter-increment: ch; border-bottom: 1px dotted var(--rule); }
+.catalog a {
+  display: flex; gap: 14px; align-items: baseline;
+  padding: 12px 4px; color: var(--ink); text-decoration: none;
+  font-family: 'IM Fell English', Georgia, serif; font-size: 1.15rem;
+}
+.catalog a::before {
+  content: counter(ch, upper-roman) ".";
+  color: var(--brown-600); font-style: italic; min-width: 3.2em; font-family: 'Lora', Georgia, serif; font-size: .95rem;
+}
+.catalog a:hover { color: var(--accent); }
+
+.back {
+  display: inline-block; margin-bottom: 18px;
+  color: var(--accent); text-decoration: none; font-size: .95rem; letter-spacing: .05em;
+}
+.back:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- reader ---------- */
+.reader-bar {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+  padding: 8px 0; margin-bottom: 14px;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  font-size: .9rem;
+}
+.reader-bar .size button {
+  background: none; border: 1px solid var(--rule); color: var(--brown-800);
+  font: inherit; width: 34px; height: 30px; cursor: pointer; margin-left: 4px;
+}
+.reader-bar .size button:hover { background: var(--paper-edge); }
+.progress { position: absolute; left: 0; bottom: -1px; height: 3px; background: var(--accent); width: 0; }
+
+.chapter { background: var(--paper-edge); border: 1px solid var(--rule); padding: 30px 36px 36px; position: relative; }
+.chapter h2 {
+  font-family: 'IM Fell English', Georgia, serif; font-weight: 400;
+  text-align: center; font-size: 2rem; color: var(--brown-900); margin: 0 0 6px;
+}
+.chapter .ornament { text-align: center; color: var(--brown-600); letter-spacing: .6em; margin-bottom: 26px; }
+.chapter p { margin: 0 0 1.05em; text-align: justify; hyphens: auto; }
+.chapter p:first-of-type::first-letter {
+  float: left; font-family: 'IM Fell English', Georgia, serif; font-size: 4.1em; line-height: .85;
+  padding: 6px 10px 0 0; color: var(--accent);
+}
+
+.pager {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 36px; padding-top: 16px; border-top: 3px double var(--brown-700);
+}
+.pager a {
+  color: var(--accent); text-decoration: none; padding: 6px 4px; letter-spacing: .04em;
+}
+.pager a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.pager a.disabled { color: var(--rule); pointer-events: none; }
+
+.colophon {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  margin-top: 60px; padding-top: 14px; border-top: 1px solid var(--rule);
+  font-size: .85rem; font-style: italic; color: var(--brown-600);
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .masthead h1 { font-size: 2.1rem; }
+  .book-page, .chapter { padding: 22px 18px 26px; }
+  .chapter p { text-align: left; }
+  .spine { width: 40px; }
+  .spine-title { font-size: .85rem; }
+}
