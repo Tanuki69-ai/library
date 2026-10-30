@@ -12,6 +12,7 @@
   --gold: #c9a24a;
   --rule: #b89968;
   --accent: #9a4f2a;
+  --tap: 44px;
 }
 
 * { box-sizing: border-box; }
@@ -27,12 +28,15 @@ body {
   font-size: 18px;
   line-height: 1.75;
   min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
 }
 
 .frame {
   max-width: 980px;
   margin: 0 auto;
-  padding: 28px 20px 60px;
+  padding: 24px 16px 48px;
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
 }
 
 /* ---------- шапка ---------- */
@@ -40,65 +44,67 @@ body {
   text-align: center;
   border-top: 4px double var(--brown-700);
   border-bottom: 4px double var(--brown-700);
-  padding: 22px 0 16px;
-  margin-bottom: 36px;
+  padding: 18px 0 14px;
+  margin-bottom: 28px;
 }
-.crest { color: var(--gold); font-size: 1.6rem; line-height: 1; }
+.crest { color: var(--gold); font-size: 1.5rem; line-height: 1; }
 .masthead h1 {
   font-family: 'IM Fell English', Georgia, serif;
   font-weight: 400;
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   margin: 6px 0 2px;
   color: var(--brown-900);
   letter-spacing: .02em;
+  line-height: 1.2;
 }
-.tagline { font-style: italic; color: var(--brown-600); margin: 0; }
-.topnav { margin-top: 12px; font-size: .95rem; }
-.topnav a { color: var(--accent); text-decoration: none; letter-spacing: .08em; text-transform: uppercase; }
-.topnav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.tagline { font-style: italic; color: var(--brown-600); margin: 0; font-size: .95rem; }
+.topnav { margin-top: 10px; font-size: .95rem; }
+.topnav a {
+  color: var(--accent); text-decoration: none; letter-spacing: .08em; text-transform: uppercase;
+  display: inline-block; padding: 8px 6px;
+}
 
-.empty { text-align: center; font-style: italic; color: var(--brown-600); padding: 40px 0; }
+.empty { text-align: center; font-style: italic; color: var(--brown-600); padding: 32px 0; }
 
 /* ---------- полки ---------- */
 .shelf {
   position: relative;
   background: linear-gradient(to bottom, var(--wood), var(--wood-dark));
-  padding: 26px 22px 0;
-  margin-bottom: 36px;
+  padding: 24px 14px 0;
+  margin-bottom: 32px;
   border-radius: 3px;
   box-shadow: inset 0 0 0 2px rgba(0,0,0,.15), 0 6px 0 var(--wood-dark);
 }
 .shelf-label {
   position: absolute; top: -6px; left: 50%; transform: translate(-50%, -50%);
   background: var(--paper); border: 1.5px solid var(--brown-700);
-  padding: 0 14px; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--brown-800);
+  padding: 0 12px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--brown-800); white-space: nowrap;
 }
 .spines {
   display: flex; flex-wrap: wrap; align-items: flex-end; gap: 4px;
-  min-height: 210px;
-  padding-bottom: 0;
+  min-height: 190px;
 }
 .plank {
   height: 14px;
   background: linear-gradient(to bottom, #7a4f2d, #4f321b);
-  margin: 0 -22px;
+  margin: 0 -14px;
   box-shadow: 0 3px 4px rgba(0,0,0,.35);
 }
 
 /* один корешок */
 .spine {
-  --h: 180px;
-  width: 52px; height: var(--h);
+  --h: 170px;
+  width: 44px; height: var(--h);
   background: var(--spine, var(--brown-700));
   color: var(--paper);
-  border: none; padding: 0; cursor: pointer;
   position: relative;
   display: flex; align-items: center; justify-content: center;
   text-decoration: none;
   box-shadow: inset 2px 0 0 rgba(255,255,255,.12), inset -2px 0 0 rgba(0,0,0,.25);
   transition: transform .18s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.spine:hover, .spine:focus-visible { transform: translateY(-10px); outline: none; }
 .spine::before, .spine::after {
   content: ""; position: absolute; left: 4px; right: 4px; height: 3px;
   background: var(--gold); opacity: .85;
@@ -109,7 +115,7 @@ body {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-family: 'IM Fell English', Georgia, serif;
-  font-size: 1rem;
+  font-size: .95rem;
   letter-spacing: .04em;
   white-space: nowrap;
   overflow: hidden;
@@ -117,28 +123,33 @@ body {
   max-height: calc(var(--h) - 36px);
   color: var(--gold);
 }
+.spine:active { transform: translateY(-6px); }
+@media (hover: hover) {
+  .spine:hover { transform: translateY(-10px); }
+}
 
 /* ---------- страница книги ---------- */
 .book-page {
   background: var(--paper-edge);
   border: 1px solid var(--rule);
-  box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px var(--rule);
-  padding: 34px 36px 40px;
-  margin-top: 10px;
+  box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--rule);
+  padding: 24px 20px 28px;
+  margin-top: 8px;
   position: relative;
 }
 .bookplate {
   text-align: center;
   border-bottom: 1px solid var(--rule);
-  padding-bottom: 18px;
-  margin-bottom: 24px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
 }
 .bookplate h2 {
   font-family: 'IM Fell English', Georgia, serif;
   font-weight: 400;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: var(--brown-900);
   margin: 0 0 4px;
+  line-height: 1.25;
 }
 .bookplate .author { font-style: italic; color: var(--brown-600); margin: 0; }
 .bookplate .desc { max-width: 60ch; margin: 10px auto 0; font-size: .95rem; }
@@ -146,111 +157,213 @@ body {
 .catalog { list-style: none; padding: 0; margin: 0; counter-reset: ch; }
 .catalog li { counter-increment: ch; border-bottom: 1px dotted var(--rule); }
 .catalog a {
-  display: flex; gap: 14px; align-items: baseline;
-  padding: 12px 4px; color: var(--ink); text-decoration: none;
-  font-family: 'IM Fell English', Georgia, serif; font-size: 1.15rem;
+  display: flex; gap: 10px; align-items: baseline;
+  min-height: var(--tap);
+  padding: 10px 2px; color: var(--ink); text-decoration: none;
+  font-family: 'IM Fell English', Georgia, serif; font-size: 1.1rem;
+  -webkit-tap-highlight-color: transparent;
 }
 .catalog a::before {
   content: counter(ch, upper-roman) ".";
-  color: var(--brown-600); font-style: italic; min-width: 3.2em; font-family: 'Lora', Georgia, serif; font-size: .95rem;
+  color: var(--brown-600); font-style: italic; min-width: 2.6em;
+  font-family: 'Lora', Georgia, serif; font-size: .95rem;
 }
-.catalog a:hover { color: var(--accent); }
+.catalog a:active { color: var(--accent); }
 
 .back {
-  display: inline-block; margin-bottom: 18px;
-  color: var(--accent); text-decoration: none; font-size: .95rem; letter-spacing: .05em;
+  display: inline-flex; align-items: center; min-height: var(--tap);
+  margin-bottom: 8px;
+  color: var(--accent); text-decoration: none; font-size: .95rem; letter-spacing: .04em;
 }
-.back:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 /* ---------- чтение ---------- */
 .reader-bar {
   position: sticky; top: 0; z-index: 5;
   background: var(--paper); border-bottom: 1px solid var(--rule);
-  padding: 8px 0; margin-bottom: 14px;
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 6px 0; margin-bottom: 12px;
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
   font-size: .9rem;
 }
-.reader-bar a { color: var(--accent); text-decoration: none; }
+.reader-bar a {
+  color: var(--accent); text-decoration: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  padding: 8px 0;
+}
+.reader-bar .size { display: flex; gap: 6px; flex-shrink: 0; }
 .reader-bar .size button {
   background: none; border: 1px solid var(--rule); color: var(--brown-800);
-  font: inherit; width: 34px; height: 30px; cursor: pointer; margin-left: 4px;
+  font: inherit; width: var(--tap); height: var(--tap); cursor: pointer;
 }
-.reader-bar .size button:hover { background: var(--paper-edge); }
+.reader-bar .size button:active { background: var(--paper-edge); }
 .progress { position: absolute; left: 0; bottom: -1px; height: 3px; background: var(--accent); width: 0; }
 
-.chapter { background: var(--paper-edge); border: 1px solid var(--rule); padding: 30px 36px 36px; position: relative; }
+.chapter { background: var(--paper-edge); border: 1px solid var(--rule); padding: 24px 20px 28px; position: relative; }
 .chapter h2 {
   font-family: 'IM Fell English', Georgia, serif; font-weight: 400;
-  text-align: center; font-size: 2rem; color: var(--brown-900); margin: 0 0 6px;
+  text-align: center; font-size: 1.6rem; color: var(--brown-900); margin: 0 0 6px; line-height: 1.25;
 }
-.chapter .ornament { text-align: center; color: var(--brown-600); letter-spacing: .6em; margin-bottom: 26px; }
-.chapter p { margin: 0 0 1.05em; text-align: justify; hyphens: auto; }
+.chapter .ornament { text-align: center; color: var(--brown-600); letter-spacing: .6em; margin-bottom: 22px; }
+.chapter p { margin: 0 0 1em; text-align: left; hyphens: auto; overflow-wrap: anywhere; }
 .chapter p:first-of-type::first-letter {
-  float: left; font-family: 'IM Fell English', Georgia, serif; font-size: 4.1em; line-height: .85;
-  padding: 6px 10px 0 0; color: var(--accent);
+  float: left; font-family: 'IM Fell English', Georgia, serif; font-size: 3.8em; line-height: .85;
+  padding: 6px 8px 0 0; color: var(--accent);
 }
 
 .pager {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-  margin-top: 36px; padding-top: 16px; border-top: 3px double var(--brown-700);
+  display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 28px; padding-top: 12px; border-top: 3px double var(--brown-700);
 }
 .pager a {
-  color: var(--accent); text-decoration: none; padding: 6px 4px; letter-spacing: .04em;
+  color: var(--accent); text-decoration: none; min-height: var(--tap);
+  display: inline-flex; align-items: center; padding: 0 6px; letter-spacing: .03em;
 }
-.pager a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .pager a.disabled { color: var(--rule); pointer-events: none; }
 
 .colophon {
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-  margin-top: 60px; padding-top: 14px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+  margin-top: 40px; padding-top: 12px; border-top: 1px solid var(--rule);
   font-size: .85rem; font-style: italic; color: var(--brown-600);
 }
 
 /* ---------- редактор ---------- */
-.editor-bar { display: flex; gap: 22px; justify-content: center; margin-bottom: 24px; font-size: .95rem; }
-.editor-bar a { color: var(--brown-600); text-decoration: none; letter-spacing: .06em; text-transform: uppercase; padding-bottom: 3px; }
-.editor-bar a.on { color: var(--accent); border-bottom: 2px solid var(--accent); }
-.editor-card { background: var(--paper-edge); border: 1px solid var(--rule); padding: 26px 28px; }
-.editor-card .page-title { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; color: var(--brown-900); font-size: 1.8rem; margin: 0 0 8px; text-align: center; }
-.editor-card label { display: grid; gap: 4px; margin-bottom: 14px; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--brown-700); }
-.editor-card input, .editor-card textarea {
-  font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; color: var(--ink);
-  background: var(--paper); border: 1.5px solid var(--brown-600); padding: 8px 10px; width: 100%;
+.editor-bar {
+  display: flex; gap: 6px; justify-content: center; margin-bottom: 18px;
+  font-size: .9rem; flex-wrap: wrap;
 }
-.editor-card textarea { min-height: 120px; resize: vertical; }
-.editor-card textarea.body { min-height: 50vh; line-height: 1.7; }
-.editor-card .actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-.editor-card .section-title { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; font-size: 1.3rem; margin: 26px 0 8px; color: var(--brown-900); }
+.editor-bar a {
+  color: var(--brown-600); text-decoration: none; letter-spacing: .05em; text-transform: uppercase;
+  min-height: var(--tap); display: inline-flex; align-items: center; padding: 0 12px;
+  border-bottom: 2px solid transparent;
+}
+.editor-bar a.on { color: var(--accent); border-bottom-color: var(--accent); }
+
+.editor-card { background: var(--paper-edge); border: 1px solid var(--rule); padding: 20px 16px 22px; }
+.editor-card .page-title {
+  font-family: 'IM Fell English', Georgia, serif; font-weight: 400;
+  color: var(--brown-900); font-size: 1.5rem; margin: 0 0 8px; text-align: center; line-height: 1.25;
+}
+.editor-card label {
+  display: grid; gap: 4px; margin-bottom: 14px;
+  font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--brown-700);
+}
+/* font-size 16px не даёт iPhone приближать страницу при фокусе на поле */
+.editor-card input, .editor-card textarea {
+  font: inherit; font-size: 16px; text-transform: none; letter-spacing: 0; color: var(--ink);
+  background: var(--paper); border: 1.5px solid var(--brown-600); padding: 10px 12px; width: 100%;
+  border-radius: 0; -webkit-appearance: none; appearance: none;
+  min-height: var(--tap);
+}
+.editor-card textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+.editor-card textarea.body { min-height: 50vh; }
+
+.editor-card .actions {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+  gap: 10px; margin-top: 12px;
+}
+.editor-card .section-title {
+  font-family: 'IM Fell English', Georgia, serif; font-weight: 400;
+  font-size: 1.25rem; margin: 22px 0 6px; color: var(--brown-900);
+}
 .editor-card button, .editor-row button, .chapter-edit button {
-  background: none; border: none; color: var(--accent); font: inherit; cursor: pointer; padding: 4px 6px; text-decoration: underline; text-underline-offset: 3px;
+  background: none; border: none; color: var(--accent); font: inherit; cursor: pointer;
+  min-height: var(--tap); min-width: var(--tap); padding: 6px 10px;
+  text-decoration: underline; text-underline-offset: 3px;
+  -webkit-tap-highlight-color: transparent;
 }
 .editor-card button.primary, .toolbar button.primary, .actions button.primary {
-  text-decoration: none; background: var(--brown-700); color: var(--paper); padding: 8px 16px; letter-spacing: .04em;
+  text-decoration: none; background: var(--brown-700); color: var(--paper);
+  padding: 10px 18px; letter-spacing: .03em;
 }
-.editor-card button.danger, .editor-row button.danger, .chapter-edit button.danger, .actions button.danger { color: #8b2e1a; }
+.editor-card button.danger, .editor-row button.danger,
+.chapter-edit button.danger, .actions button.danger { color: #8b2e1a; }
 .editor-card button:disabled, .chapter-edit button:disabled { opacity: .35; cursor: default; text-decoration: none; }
 .editor-card a, .editor-row a, .chapter-edit a { color: var(--accent); }
-.primary-link { background: var(--brown-700); color: var(--paper) !important; padding: 8px 16px; text-decoration: none !important; }
-.toolbar { display: flex; justify-content: center; margin-bottom: 22px; }
-.editor-row {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding: 12px 4px; border-bottom: 1px dotted var(--rule);
+.primary-link {
+  background: var(--brown-700); color: var(--paper) !important; padding: 10px 18px;
+  text-decoration: none !important; display: inline-flex; align-items: center; min-height: var(--tap);
 }
-.editor-row .tools { display: flex; gap: 10px; }
-.editor-row a { color: var(--accent); }
-.chapter-edit { list-style: none; padding: 0; margin: 0; }
-.chapter-edit li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px dotted var(--rule); flex-wrap: wrap; }
-.chapter-edit .tools { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
-.chapter-edit .tools a { color: var(--accent); font-size: .9rem; padding: 0 6px; }
-.status { font-size: .9rem; color: var(--accent); min-height: 1.2em; margin: 0 0 6px; }
-.hint { font-size: .85rem; color: var(--brown-600); font-style: italic; margin: 0 0 12px; }
 
-/* ---------- маленькие экраны ---------- */
+.toolbar { display: flex; justify-content: center; margin-bottom: 18px; }
+
+.editor-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 10px 2px; border-bottom: 1px dotted var(--rule);
+}
+.editor-row > div:first-child { min-width: 0; flex: 1 1 180px; overflow-wrap: anywhere; }
+.editor-row .tools { display: flex; gap: 4px; flex-wrap: wrap; }
+.editor-row a {
+  color: var(--accent); min-height: var(--tap); display: inline-flex; align-items: center; padding: 0 8px;
+}
+
+.chapter-edit { list-style: none; padding: 0; margin: 0; }
+.chapter-edit li {
+  display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  padding: 6px 0; border-bottom: 1px dotted var(--rule); flex-wrap: wrap;
+}
+.chapter-edit li > span:first-child { flex: 1 1 140px; min-width: 0; overflow-wrap: anywhere; }
+.chapter-edit .tools { display: flex; gap: 2px; align-items: center; flex-wrap: wrap; }
+.chapter-edit .tools a { font-size: .9rem; display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 6px; }
+
+.status { font-size: .9rem; color: var(--accent); min-height: 1.2em; margin: 0 0 6px; }
+.hint { font-size: .85rem; color: var(--brown-600); font-style: italic; margin: 0 0 10px; }
+
+/* ---------- телефоны ---------- */
 @media (max-width: 640px) {
-  body { font-size: 17px; }
-  .masthead h1 { font-size: 2.1rem; }
-  .book-page, .chapter, .editor-card { padding: 22px 18px 26px; }
+  body { font-size: 17px; line-height: 1.7; }
+
+  .masthead { margin-bottom: 22px; }
+  .masthead h1 { font-size: 1.8rem; }
+  .tagline { font-size: .88rem; }
+
+  .shelf { padding: 20px 10px 0; margin-bottom: 26px; }
+  .shelf-label { font-size: .65rem; padding: 0 10px; }
+  .spines { min-height: 170px; gap: 3px; }
+  .plank { margin: 0 -10px; }
+  .spine { width: 36px; --h: 150px; }
+  .spine-title { font-size: .82rem; max-height: calc(var(--h) - 30px); }
+  .spine::before { top: 8px; }
+  .spine::after { bottom: 8px; }
+
+  .book-page { padding: 18px 14px 22px; box-shadow: none; border: 1px solid var(--rule); }
+  .bookplate h2 { font-size: 1.5rem; }
+  .catalog a { font-size: 1.02rem; }
+  .catalog a::before { min-width: 2.2em; }
+
+  .reader-bar { font-size: .85rem; }
+  .chapter { padding: 18px 14px 22px; }
+  .chapter h2 { font-size: 1.35rem; }
   .chapter p { text-align: left; }
-  .spine { width: 40px; }
-  .spine-title { font-size: .85rem; }
+  .chapter p:first-of-type::first-letter { font-size: 3.2em; }
+
+  .pager { justify-content: space-between; }
+  .pager a { font-size: .95rem; }
+
+  .colophon { font-size: .8rem; }
+
+  .editor-card { padding: 16px 12px 18px; }
+  .editor-card .page-title { font-size: 1.3rem; }
+  .editor-card .actions { flex-direction: column-reverse; align-items: stretch; }
+  .editor-card .actions > * { width: 100%; text-align: center; }
+  .editor-card .actions button.primary,
+  .editor-card .actions a.primary-link { justify-content: center; }
+  .editor-card .actions a { text-align: center; padding: 10px 0; }
+  .editor-bar a { padding: 0 10px; font-size: .85rem; }
+  .toolbar button.primary { width: 100%; }
+}
+
+/* очень узкие экраны */
+@media (max-width: 360px) {
+  .masthead h1 { font-size: 1.6rem; }
+  .spine { width: 32px; }
+  .spine-title { font-size: .75rem; }
+}
+
+/* широкие экраны: вернуть немного простора */
+@media (min-width: 900px) {
+  .masthead h1 { font-size: 2.8rem; }
+  .shelf { padding: 26px 22px 0; }
+  .spine { width: 52px; }
+  .spine-title { font-size: 1rem; }
+  .book-page, .chapter { padding: 30px 36px 36px; }
+  .chapter p { text-align: justify; }
 }
